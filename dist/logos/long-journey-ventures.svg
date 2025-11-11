@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" role="img" aria-label="Long Journey Ventures logo placeholder">
+  <rect width="220" height="60" rx="10" fill="#0b0e17"/>
+  <g fill="#eaf0ff">
+    <text x="20" y="38" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="22" font-weight="700">Long Journey</text>
+    <text x="20" y="54" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="14" fill="#c3c9d9">Ventures</text>
+  </g>
+</svg>
+
