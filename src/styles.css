@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 :root {
   --bg: #0b0e17;
   --text: #eaf0ff;
@@ -12,7 +14,7 @@
 html, body, #root { height: 100%; }
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
@@ -27,68 +29,76 @@ body {
   overflow: hidden;
 }
 
-.hero-video {
+.hero-video-grid {
   position: absolute;
   inset: 0;
+  display: flex;
   width: 100%;
   height: 100%;
+}
+
+.hero-video {
+  flex: 0 0 50%;
+  width: 50%;
+  height: 100%;
   object-fit: cover;
-  filter: saturate(1.1) contrast(1.05);
+  filter: none;
   transform: translateZ(0);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 14, 23, 0.20) 0%, rgba(11, 14, 23, 0.55) 55%, rgba(11, 14, 23, 0.85) 100%),
-              radial-gradient(60% 80% at 50% 20%, rgba(122, 165, 255, 0.25) 0%, rgba(126, 255, 212, 0.18) 35%, rgba(0,0,0,0) 70%);
+  background: none;
   pointer-events: none;
 }
 
 .hero-content {
-  position: relative;
+  position: absolute;
   z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 88px 24px 64px;
+  left: 0;
+  top: 0;
+  max-width: min(540px, 90vw);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  padding: 28px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
 }
-
 .brand {
-  padding: 8px 14px;
-  margin-bottom: 20px;
-  border-radius: 999px;
-  border: 1px solid var(--glass-border);
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  backdrop-filter: blur(6px);
-  color: #ffffff;
-  font-weight: 600;
-  letter-spacing: 0.2px;
+  font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+  font-size: clamp(1.05rem, 0.8vw + 0.9rem, 1.4rem);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #f8faff;
+  opacity: 0.92;
+  margin-bottom: 18px;
 }
+.hero-content > :first-child { margin-top: 0; }
 
 .title {
-  font-size: clamp(2.2rem, 3vw + 1.2rem, 4.2rem);
+  font-size: clamp(1.85rem, 2.2vw + 1.1rem, 3.1rem);
   line-height: 1.05;
-  margin: 6px 0 14px;
-  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.35);
+  margin: 0 0 10px;
+  color: #f8faff;
 }
-.title .accent { color: var(--accent); }
+.title .accent { color: #dbe5ff; }
 
 .subtitle {
-  max-width: 780px;
-  color: var(--muted);
-  font-size: clamp(1rem, 0.4vw + 0.9rem, 1.15rem);
-  margin: 0 0 26px;
+  max-width: 680px;
+  color: rgba(248, 250, 255, 0.92);
+  font-size: clamp(0.92rem, 0.35vw + 0.85rem, 1.05rem);
+  margin: 0 0 18px;
 }
 
 .cta-row {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .btn {
@@ -102,19 +112,19 @@ body {
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
 }
 .btn.primary {
-  background: linear-gradient(180deg, #8ab2ff, #6f98ff 60%, #5f87ff);
-  color: #0b0e17;
-  box-shadow: 0 6px 26px rgba(122, 165, 255, 0.35);
+  background: linear-gradient(180deg, #ffd447, #ffbf19 60%, #f5a800);
+  color: #161616;
+  box-shadow: 0 6px 18px rgba(245, 168, 0, 0.38);
 }
 .btn.primary:hover { transform: translateY(-1px); }
 
 .btn.ghost {
-  color: var(--text);
-  border: 1px solid var(--glass-border);
-  background: var(--glass);
-  backdrop-filter: blur(8px);
+  color: #f8faff;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(8, 8, 8, 0.55);
+  backdrop-filter: blur(10px);
 }
-.btn.ghost:hover { background: rgba(255,255,255,0.08); }
+.btn.ghost:hover { background: rgba(8, 8, 8, 0.68); }
 
 .scroll-indicator {
   position: absolute;
@@ -153,10 +163,6 @@ body {
 }
 .content h2 { margin: 0 0 12px; font-size: 1.6rem; }
 .content p { margin: 0; color: #d7def0; line-height: 1.7; }
-
-@media (min-width: 768px) {
-  .hero-content { padding-top: 112px; }
-}
 
 /* logos grid removed */
 /* CONTACT DRAWER */

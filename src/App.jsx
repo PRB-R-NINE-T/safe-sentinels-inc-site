@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const VIDEO_SRC =
-  'https://customer-67xx775vol0ady89.cloudflarestream.com/be263344315d6c59108740c453910770/downloads/default.mp4'
+const VIDEO_SOURCES = [
+  'https://customer-67xx775vol0ady89.cloudflarestream.com/aaf2c6124c05826452c678508b430585/downloads/default.mp4',
+  'https://customer-67xx775vol0ady89.cloudflarestream.com/2adf2229e99a6d8f029e19cdf1e9dd14/downloads/default.mp4',
+]
 
 export default function App() {
   const [open, setOpen] = useState(false)
@@ -51,24 +53,27 @@ export default function App() {
   return (
     <div className="app">
       <section className="hero" aria-label="Scenic background video hero">
-        <video
-          className="hero-video"
-          src={VIDEO_SRC}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          poster="data:image/gif;base64,R0lGODlhAQABAAAAACw="
-        />
+        <div className="hero-video-grid" aria-hidden="true">
+          {VIDEO_SOURCES.map((src) => (
+            <video
+              key={src}
+              className="hero-video"
+              src={src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="data:image/gif;base64,R0lGODlhAQABAAAAACw="
+            />
+          ))}
+        </div>
         <div className="hero-overlay" />
 
         <div className="hero-content">
-          <div className="brand">Fast Robo</div>
+          <div className="brand">fastrobo.ai</div>
           <h1 className="title">
-            Low-Cost Autonomous Robots
-            <span className="accent"> For every industry</span>
+            Low-cost automation
           </h1>
           <p className="subtitle">
             Happy customers in retail, and 3PL industries. From single-use to multi-use, we have a robot for you.
