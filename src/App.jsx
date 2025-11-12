@@ -4,36 +4,56 @@ const VIDEO_SOURCES = [
   'https://customer-67xx775vol0ady89.cloudflarestream.com/aaf2c6124c05826452c678508b430585/downloads/default.mp4',
   'https://customer-67xx775vol0ady89.cloudflarestream.com/2adf2229e99a6d8f029e19cdf1e9dd14/downloads/default.mp4',
 ]
+const GETFORM_ENDPOINT = 'https://getform.io/f/bxozkgpa'
 
 export default function App() {
   const [open, setOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(null)
   const firstFieldRef = useRef(null)
 
   function handleOpen(e) {
     e?.preventDefault()
     setSubmitted(false)
+    setError(null)
     setOpen(true)
   }
 
   function handleClose() {
     setOpen(false)
+    setError(null)
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+    setError(null)
+    setSubmitting(true)
+
     const formData = new FormData(e.currentTarget)
-    // Basic demo handling: log values and show a confirmation state
-    const payload = Object.fromEntries(formData.entries())
-    // Note: File inputs are not enumerable in Object.fromEntries if empty
-    // We'll access the file separately to preserve it if present
-    const videoFile = formData.get('workflowVideo')
-    if (videoFile && typeof videoFile === 'object' && videoFile.name) {
-      payload.workflowVideo = videoFile.name
+    formData.append('form-origin', 'fastrobo.ai contact drawer')
+
+    try {
+      const response = await fetch(GETFORM_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`)
+      }
+
+      setSubmitted(true)
+      e.currentTarget.reset()
+    } catch (err) {
+      console.error('Contact form submission failed:', err)
+      setError('Something went wrong. Please email us directly at pierre@safesentinels.com.')
+    } finally {
+      setSubmitting(false)
     }
-    console.log('Contact form submission:', payload)
-    setSubmitted(true)
-    // Keep the drawer open to show confirmation; you could also close it
   }
 
   // Close on ESC when open
@@ -119,7 +139,16 @@ export default function App() {
             <button className="btn primary" onClick={handleClose}>Close</button>
           </div>
         ) : (
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form
+            className="contact-form"
+            action={GETFORM_ENDPOINT}
+            method="POST"
+            encType="multipart/form-data"
+            onSubmit={handleSubmit}
+          >
+            <input type="hidden" name="_gotcha" aria-hidden="true" style={{ display: 'none' }} />
+            <input type="hidden" name="form-source" value="fastrobo.ai contact drawer" />
+            {error ? <p className="form-error" role="alert">{error}</p> : null}
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="name">Name</label>
@@ -157,7 +186,9 @@ export default function App() {
             </div>
 
             <div className="form-actions">
-              <button type="submit" className="btn primary">Submit</button>
+              <button type="submit" className="btn primary" disabled={submitting}>
+                {submitting ? 'Submitting…' : 'Submit'}
+              </button>
               <button type="button" className="btn ghost" onClick={handleClose}>Cancel</button>
             </div>
           </form>
