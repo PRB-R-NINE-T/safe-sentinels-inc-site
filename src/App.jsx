@@ -96,7 +96,7 @@ export default function App() {
             Low-cost automation
           </h1>
           <p className="subtitle">
-            Happy customers in retail, and 3PL industries. From single-use to multi-use, we have a robot for you.
+            Happy customers in retail, and 3PL industries. Get ROI in 4-6 months. 1 week trial at new sites.
           </p>
           <div className="cta-row">
             <button className="btn primary" onClick={handleOpen}>Get in touch</button>
