@@ -31,7 +31,7 @@ export default function App() {
     setSubmitting(true)
 
     const formData = new FormData(e.currentTarget)
-    formData.append('form-origin', 'fastrobo.ai contact drawer')
+    formData.append('form-origin', 'safe-sentinels.com contact drawer')
 
     try {
       const response = await fetch(GETFORM_ENDPOINT, {
@@ -91,7 +91,7 @@ export default function App() {
         <div className="hero-overlay" />
 
         <div className="hero-content">
-          <div className="brand">fastrobo.ai</div>
+          <div className="brand">Safe Sentinel</div>
           <h1 className="title">
             Low-cost automation
           </h1>
@@ -147,7 +147,7 @@ export default function App() {
             onSubmit={handleSubmit}
           >
             <input type="hidden" name="_gotcha" aria-hidden="true" style={{ display: 'none' }} />
-            <input type="hidden" name="form-source" value="fastrobo.ai contact drawer" />
+            <input type="hidden" name="form-source" value="safe-sentinels.com contact drawer" />
             {error ? <p className="form-error" role="alert">{error}</p> : null}
             <div className="form-row">
               <div className="form-group">
